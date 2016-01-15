@@ -44,7 +44,7 @@ import org.osgi.service.cm.ManagedService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.NumberType;
+//import com.sun.org.apache.xalan.internal.xsltc.compiler.util.NumberType;
 	
 
 /**
@@ -416,11 +416,15 @@ public class PLCLogoBinding extends AbstractActiveBinding<PLCLogoBindingProvider
 	
 	
 	private State createState(Item itemType, Object value) {
+		DecimalType num = null;
+		if (value instanceof Number)
+			num = new DecimalType(value.toString());
+		
 		if (itemType instanceof StringType) {
 			return new StringType((String) value);
 		} else if (itemType instanceof NumberItem) {
-			if (value instanceof Number) {
-				return new DecimalType(value.toString());
+			if (num != null) {
+				return num;
 			} else if (value instanceof String) {
 				String stringValue = ((String) value).replaceAll("[^\\d|.]", "");
 				return new DecimalType(stringValue);
@@ -428,11 +432,16 @@ public class PLCLogoBinding extends AbstractActiveBinding<PLCLogoBindingProvider
 				return null;
 			}
 		} else if (itemType instanceof SwitchItem) {
-			return  ((int)value > 0) ? OnOffType.ON : OnOffType.OFF;
-		} else if (itemType instanceof ContactItem)
-			return  ((int)value > 0) ? OpenClosedType.CLOSED: OpenClosedType.OPEN;
-	
-		else {
+			if (num != null)
+				return  (num.intValue() > 0) ? OnOffType.ON : OnOffType.OFF;
+			else
+				return null;
+		} else if (itemType instanceof ContactItem) {
+			if (num != null)
+				return  (num.intValue() > 0) ? OpenClosedType.CLOSED: OpenClosedType.OPEN;
+			else 
+				return null;
+		} else {
 			return null;
 		}
 	}

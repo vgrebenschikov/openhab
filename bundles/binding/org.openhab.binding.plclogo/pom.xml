@@ -24,6 +24,14 @@
 
 	<packaging>eclipse-plugin</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>activesoap</groupId>
+			<artifactId>jaxb-xalan</artifactId>
+			<version>1.5</version>
+		</dependency>
+	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>

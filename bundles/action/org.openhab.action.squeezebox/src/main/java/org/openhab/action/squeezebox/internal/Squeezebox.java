@@ -152,14 +152,6 @@ public class Squeezebox {
 		if (!isReady()) return false;
 		return squeezeServer.playerCommand(playerId, command);
 	}
-
-	public static String squeezeNextAlarm( String playerId){
-		SqueezePlayer player = getPlayer(playerId);
-		if (player == null) return null;
-		
-		return "";
-	
-	}
 	
 	@ActionDoc(text = "Speak a message via one of your Squeezebox devices using the current volume for that device", returns = "<code>true</code>, if successful and <code>false</code> otherwise.")
 	public static boolean squeezeboxSpeak(
