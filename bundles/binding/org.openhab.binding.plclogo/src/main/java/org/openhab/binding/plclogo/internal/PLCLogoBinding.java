@@ -353,30 +353,30 @@ public class PLCLogoBinding extends AbstractActiveBinding<PLCLogoBindingProvider
 				matcher.find();
 				String controllerName = matcher.group(1);
 				PLCLogoConfig deviceConfig = controllers.get(controllerName);
-				logger.info("Config for "+ controllerName );
 
 				if (deviceConfig == null) {
 					deviceConfig = new PLCLogoConfig(controllerName);
 					controllers.put(controllerName, deviceConfig);
+					logger.info("Config for "+ controllerName );
 				}
 				if (matcher.group(2).equals("host")){
 					// matcher.find();
 					String IP = config.get(key).toString();
 					deviceConfig.setIP(IP);
-					logger.info("Config for "+ IP );
+					logger.info("Host of " + controllerName + ":" + IP );
 					configured=true;
 				}
 				if (matcher.group(2).equals("remoteTSAP")){
 					// matcher.find();
 					String remoteTSAP = config.get(key).toString();
-					logger.info("Config for " + remoteTSAP );
+					logger.info("Remote TSAP for " + controllerName + ":" + remoteTSAP );
 
 					deviceConfig.setremoteTSAP(Integer.decode(remoteTSAP));
 				}
 				if (matcher.group(2).equals("localTSAP")){
 					// matcher.find();
 					String localTSAP = config.get(key).toString();
-					logger.info("Config for "+ localTSAP );
+					logger.info("Local TSAP for " + controllerName + ":" + localTSAP );
 
 					deviceConfig.setlocalTSAP(Integer.decode(localTSAP));
 				}
