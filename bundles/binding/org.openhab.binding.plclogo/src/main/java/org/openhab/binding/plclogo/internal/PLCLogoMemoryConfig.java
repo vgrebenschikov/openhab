@@ -32,22 +32,22 @@ public class PLCLogoMemoryConfig
 			bit = (addr[0] >= 0) ? addr[0] : obit;
 			address = addr[1];
 		}
-		
+
 		public String getLocation ()
 		{
 			return this.location;
 		}
-		
+
 		public int getAddress ()
 		{
 			return this.address;
 		}
-		
+
 		public int getBit ()
 		{
 			return this.bit;
 		}		
-		
+
 		// bit location[0] and real mem loc[1]
 		private int[] convertToAddress(String memloc) 
 		{
@@ -57,7 +57,7 @@ public class PLCLogoMemoryConfig
 			retval[1] = -1;
 			// I , Q and M have bit values derived: I1 is equivalent to VB923.0
 			// TODO Add some validation to input parameters!
-			
+
 			if (memloc.length() < 2)
 				return null;
 
